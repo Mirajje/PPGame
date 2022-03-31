@@ -7,6 +7,7 @@ public class Bandit : MonoBehaviour {
     [SerializeField] float      m_jumpForce = 7.5f;
 
     private Animator            m_animator;
+    private Hitbox_Bandit       m_hitbox;
     private Rigidbody2D         m_body2d;
     private Sensor_Bandit       m_groundSensor;
     private bool                m_grounded = false;
@@ -19,19 +20,32 @@ public class Bandit : MonoBehaviour {
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.name == "Tile" && !m_grounded)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         //Check if character just landed on the ground
-        if (!m_grounded && m_groundSensor.State()) {
+        if (!m_grounded && m_groundSensor.State())
+        {
             m_grounded = true;
             m_animator.SetBool("Grounded", m_grounded);
         }
 
+        //Check if character fell off the map
+        if (transform.position.y < -6.0f)
+            transform.position = new Vector3(0.0f, 1.0f, 0.0f);
+
         //Check if character just started falling
         if(m_grounded && !m_groundSensor.State()) {
             m_grounded = false;
-            m_animator.SetBool("Grounded", m_grounded);
+            m_animator.SetBool("Grounded", false);
         }
 
         // -- Handle input and movement --
