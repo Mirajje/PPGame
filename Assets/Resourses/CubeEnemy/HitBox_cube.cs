@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HitBox_cube : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player")
             Destroy(other.gameObject);
     }
 }

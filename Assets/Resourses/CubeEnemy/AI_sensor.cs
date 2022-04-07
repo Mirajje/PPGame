@@ -23,7 +23,7 @@ public class AI_sensor : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player")
         {
             m_inRange = true;
         }
@@ -31,13 +31,13 @@ public class AI_sensor : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player")
             m_coor = other.gameObject.transform.position.x;
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player")
         {
             m_inRange = false;
         }

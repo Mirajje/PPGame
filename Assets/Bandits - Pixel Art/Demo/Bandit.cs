@@ -7,15 +7,16 @@ public class Bandit : MonoBehaviour {
     [SerializeField] float      m_jumpForce = 7.5f;
 
     private Animator            m_animator;
-    private Hitbox_Bandit       m_hitbox;
     private Rigidbody2D         m_body2d;
     private Sensor_Bandit       m_groundSensor;
+    private AttackBox_Bandit    m_attackBox;
     private bool                m_grounded = false;
     private bool                m_combatIdle = false;
     private bool                m_isDead = false;
 
     // Use this for initialization
     void Start () {
+        m_attackBox = transform.Find("AttackBox").GetComponent<AttackBox_Bandit>();
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
@@ -79,12 +80,18 @@ public class Bandit : MonoBehaviour {
             m_animator.SetTrigger("Hurt");
 
         //Attack
-        else if(Input.GetMouseButtonDown(0)) {
+        if(Input.GetMouseButtonDown(0)) {
             m_animator.SetTrigger("Attack");
+            m_attackBox.changeState(true);
+            m_attackBox.Disable(0.5f);
+        }
+        else
+        {
+            m_attackBox.changeState(false);
         }
 
         //Change between idle and combat idle
-        else if (Input.GetKeyDown("f"))
+        if (Input.GetKeyDown("f"))
             m_combatIdle = !m_combatIdle;
 
         //Jump
