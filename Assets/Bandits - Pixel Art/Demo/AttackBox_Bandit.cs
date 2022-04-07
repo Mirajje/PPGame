@@ -29,6 +29,14 @@ public class AttackBox_Bandit : MonoBehaviour
                 Destroy(other.gameObject);
     }
 
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (m_is_Attacking)
+            if (other.gameObject.tag == "Enemy")
+                Destroy(other.gameObject);
+    }
+
+
     public void Disable(float timer)
     {
         m_disableTimer = timer;

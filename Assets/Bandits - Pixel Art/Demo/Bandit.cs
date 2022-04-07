@@ -83,7 +83,7 @@ public class Bandit : MonoBehaviour {
         if(Input.GetMouseButtonDown(0)) {
             m_animator.SetTrigger("Attack");
             m_attackBox.changeState(true);
-            m_attackBox.Disable(0.5f);
+            m_attackBox.Disable(1f);
         }
         else
         {
