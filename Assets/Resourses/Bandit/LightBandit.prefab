@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 3413859572185803662}
   - component: {fileID: 1842300410024207874}
   - component: {fileID: 3102145370734503890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -125,7 +125,7 @@ public class Bandit : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "HitBox")
+        if (other.gameObject.tag == "HitBox" || other.gameObject.tag == "Bullet")
         {
             m_health -= 1;
             float green = 0f;
@@ -133,7 +133,11 @@ public class Bandit : MonoBehaviour {
                 green = 1f;
 
             m_cube.GetComponent<SpriteRenderer>().color = new Color(1f, (m_health == 2 ? 1.0f : 0f), 0f);
-            Destroy(other.transform.parent.gameObject);
+
+            if (other.gameObject.tag == "HitBox")
+                Destroy(other.transform.parent.gameObject);
+            else
+                Destroy(other.gameObject);
         }
             
 

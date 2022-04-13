@@ -9,6 +9,11 @@ public class SkullEnemy : MonoBehaviour
     [SerializeField] float m_speed = 4.0f;
     [SerializeField] float m_jumpForce = 7.5f;
 
+    [SerializeField]  private GameObject player_bullet_right;
+    [SerializeField] private GameObject player_bullet_left;
+    [SerializeField]   private Transform attack_Point;
+
+    public float attack_Timer = 0f;
     private Rigidbody2D m_body2d;
     private AI_sensor m_aiSensor;
     private Sensor_Cube m_groundSensor;
@@ -38,6 +43,7 @@ public class SkullEnemy : MonoBehaviour
             m_grounded = false;
 
         // -- Handle input and movement --
+
         float inputX = m_aiSensor.State();
         if (inputX != 0)
             if (inputX > transform.position.x && inputX - transform.position.x < 2.5f)
@@ -46,6 +52,7 @@ public class SkullEnemy : MonoBehaviour
                 inputX = 1.0f;
             else
                 inputX = 0f;
+            
 
         // Swap direction of sprite depending on walk direction
         if (inputX > 0)
@@ -53,7 +60,35 @@ public class SkullEnemy : MonoBehaviour
         else if (inputX < 0)
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
+        // attack
+        if (attack_Timer <= 0 && m_aiSensor.State() != 0f)
+        {
+            if (m_aiSensor.State() > 0)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+                attack_Timer = 5f;
+                Attack();
+            } else 
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                attack_Timer = 5f;
+                Attack();
+            }
+        }
+
         // Move
-        m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
+        if (!(attack_Timer > 4.0f))
+            m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
+
+        if (attack_Timer > 0)
+            attack_Timer -= Time.deltaTime;
+    }
+
+    void Attack()
+    {
+        if (transform.localScale.x == 1.0f)
+            Instantiate(player_bullet_right, attack_Point.position, Quaternion.identity);
+        else
+            Instantiate(player_bullet_left, attack_Point.position, Quaternion.identity);
     }
 }
