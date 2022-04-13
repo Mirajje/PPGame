@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2343719140312623033}
-  - component: {fileID: 7430048526470971922}
   - component: {fileID: 7792167538204145231}
   m_Layer: 0
   m_Name: HitBox
-  m_TagString: Untagged
+  m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,18 +31,6 @@ Transform:
   m_Father: {fileID: 1282806769052814681}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7430048526470971922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167854678420581510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 079960e782ed5b046872f490322f132f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &7792167538204145231
 BoxCollider2D:
   m_ObjectHideFlags: 0

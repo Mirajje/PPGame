@@ -6,6 +6,8 @@ public class Bandit : MonoBehaviour {
     [SerializeField] float      m_speed = 4.0f;
     [SerializeField] float      m_jumpForce = 7.5f;
 
+    private GameObject          m_cube;
+    private int                 m_health;
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
     private Sensor_Bandit       m_groundSensor;
@@ -16,6 +18,8 @@ public class Bandit : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        m_health = 3;
+        m_cube = GameObject.Find("HealthCube_Bandit");
         m_attackBox = transform.Find("AttackBox").GetComponent<AttackBox_Bandit>();
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
@@ -31,7 +35,8 @@ public class Bandit : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update () 
+    {
         //Check if character just landed on the ground
         if (!m_grounded && m_groundSensor.State())
         {
@@ -117,4 +122,23 @@ public class Bandit : MonoBehaviour {
         else
             m_animator.SetInteger("AnimState", 0);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "HitBox")
+        {
+            m_health -= 1;
+            float green = 0f;
+            if (m_health == 2)
+                green = 1f;
+
+            m_cube.GetComponent<SpriteRenderer>().color = new Color(1f, (m_health == 2 ? 1.0f : 0f), 0f);
+            Destroy(other.transform.parent.gameObject);
+        }
+            
+
+        if (m_health <= 0)
+            Destroy(gameObject);
+    }
+
 }
