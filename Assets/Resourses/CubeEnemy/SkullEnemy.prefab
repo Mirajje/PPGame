@@ -68,7 +68,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.05, y: 2.05}
+  m_Size: {x: 1.21, y: 1.29}
   m_EdgeRadius: 0
 --- !u!1 &3924960872282043553
 GameObject:
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 160810538622605474}
   - component: {fileID: 6101478693567487866}
   m_Layer: 6
-  m_Name: CubeEnemy
+  m_Name: SkullEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d98195b762487443b91f80c6b3dce0c, type: 3}
   m_Color: {r: 0.6415094, g: 0.2208971, b: 0.2208971, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -256,7 +256,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1.06}
+  m_Size: {x: 0.68, y: 1.3}
   m_Direction: 0
 --- !u!50 &6101478693567487866
 Rigidbody2D:
@@ -305,7 +305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7299758069824395231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.526, z: 0}
+  m_LocalPosition: {x: 0, y: -0.649, z: 0}
   m_LocalScale: {x: 0.4883528, y: 0.4883528, z: 0.4883528}
   m_Children: []
   m_Father: {fileID: 1282806769052814681}
