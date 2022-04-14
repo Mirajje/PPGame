@@ -37,6 +37,9 @@ public class Bandit : MonoBehaviour {
     // Update is called once per frame
     void Update () 
     {
+        if (m_isDead)
+            return;
+
         //Check if character just landed on the ground
         if (!m_grounded && m_groundSensor.State())
         {
@@ -125,6 +128,8 @@ public class Bandit : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (m_isDead)
+            return;
         if (other.gameObject.tag == "HitBox" || other.gameObject.tag == "Bullet")
         {
             m_health -= 1;
@@ -132,7 +137,7 @@ public class Bandit : MonoBehaviour {
             if (m_health == 2)
                 green = 1f;
 
-            m_cube.GetComponent<SpriteRenderer>().color = new Color(1f, (m_health == 2 ? 1.0f : 0f), 0f);
+            m_cube.GetComponent<SpriteRenderer>().color = new Color((m_health == 2 || m_health == 1) ? 1.0f : 0f, (m_health == 2 ? 1.0f : 0f), 0f);
 
             if (other.gameObject.tag == "HitBox")
                 Destroy(other.transform.parent.gameObject);
@@ -142,7 +147,10 @@ public class Bandit : MonoBehaviour {
             
 
         if (m_health <= 0)
-            Destroy(gameObject);
+        {
+            m_animator.SetTrigger("Death");
+            m_isDead = true;
+        }
     }
 
 }
