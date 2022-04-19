@@ -63,12 +63,12 @@ public class SkullEnemy : MonoBehaviour
         // attack
         if (attack_Timer <= 0 && m_aiSensor.State() != 0f)
         {
-            if (m_aiSensor.State() > 0)
+            if (m_aiSensor.State() > transform.position.x && inputX == 0)
             {
                 transform.localScale = new Vector3(-1f, 1f, 1f);
                 attack_Timer = 5f;
                 Attack();
-            } else 
+            } else if (inputX == 0)
             {
                 transform.localScale = new Vector3(1f, 1f, 1f);
                 attack_Timer = 5f;
