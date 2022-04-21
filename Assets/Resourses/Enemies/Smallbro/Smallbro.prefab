@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167854678420581510}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.000000014554048, y: 0.00000005821619, z: 0}
-  m_LocalScale: {x: 0.33, y: 0.33, z: 0.4883528}
+  m_LocalPosition: {x: -0.01, y: -0.01, z: 0}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.4883528}
   m_Children: []
   m_Father: {fileID: 1282806769052814681}
   m_RootOrder: 0
@@ -84,7 +84,7 @@ Transform:
   m_GameObject: {fileID: 3924960872282043553}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.000000014554048, y: 0.00000005821619, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 0.4883528}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1282806769052814681}
   m_RootOrder: 2
@@ -137,12 +137,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1282806769052814681}
   - component: {fileID: 1291786816459219162}
-  - component: {fileID: 7146087990812312433}
   - component: {fileID: 160810538622605474}
   - component: {fileID: 6101478693567487866}
-  - component: {fileID: 2442216396204849823}
+  - component: {fileID: 417735174145518200}
+  - component: {fileID: -7241614539275388956}
   m_Layer: 6
-  m_Name: CerberusEnemy
+  m_Name: Smallbro
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 4414243804430418518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.65, y: 2.04, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 2343719140312623033}
   - {fileID: 5513387375175470265}
@@ -205,8 +205,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f37ec6b2772b46c4688e5082489f0d4b, type: 3}
-  m_Color: {r: 0.6415094, g: 0.2208971, b: 0.2208971, a: 1}
+  m_Sprite: {fileID: -1882347247711912902, guid: 836c8824575b264448fb550ef0d4aee4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -216,20 +216,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7146087990812312433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4414243804430418518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65e66d53eaa7cea49a1815885b4bea43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 2
-  m_jumpForce: 7.5
 --- !u!70 &160810538622605474
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -244,7 +230,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.7, y: 0.73}
+  m_Size: {x: 0.17, y: 0.2}
   m_Direction: 0
 --- !u!50 &6101478693567487866
 Rigidbody2D:
@@ -267,7 +253,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!95 &2442216396204849823
+--- !u!95 &417735174145518200
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -277,7 +263,7 @@ Animator:
   m_GameObject: {fileID: 4414243804430418518}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ed500dad8daaf0b4e946605e598081c6, type: 2}
+  m_Controller: {fileID: 9100000, guid: f46eec998ec78c041a0020a82931f9e9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -286,6 +272,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-7241614539275388956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414243804430418518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44e06e1a76e6194c85d2d26dc408ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speed: 4
+  m_jumpForce: 7.5
 --- !u!1 &7299758069824395231
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,8 +312,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7299758069824395231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.365, z: 0}
-  m_LocalScale: {x: 0.4883528, y: 0.4883528, z: 0.4883528}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1282806769052814681}
   m_RootOrder: 1
