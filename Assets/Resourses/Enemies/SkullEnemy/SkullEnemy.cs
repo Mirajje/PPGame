@@ -15,6 +15,7 @@ public class SkullEnemy : MonoBehaviour
 
     public float attack_Timer = 0f;
     private Rigidbody2D m_body2d;
+    private Animator m_animator;
     private AI_sensor m_aiSensor;
     private Sensor_Cube m_groundSensor;
     private bool m_grounded = false;
@@ -22,6 +23,7 @@ public class SkullEnemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        m_animator = GetComponent<Animator>();
         m_aiSensor = transform.Find("AISensor").GetComponent<AI_sensor>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Cube>();
@@ -65,11 +67,13 @@ public class SkullEnemy : MonoBehaviour
         {
             if (m_aiSensor.State() > transform.position.x && inputX == 0)
             {
+                m_animator.SetTrigger("IsAttacking");
                 transform.localScale = new Vector3(-1f, 1f, 1f);
                 attack_Timer = 5f;
                 Attack();
             } else if (inputX == 0)
             {
+                m_animator.SetTrigger("IsAttacking");
                 transform.localScale = new Vector3(1f, 1f, 1f);
                 attack_Timer = 5f;
                 Attack();
