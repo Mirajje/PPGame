@@ -1054,7 +1054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886438099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.74, y: -0.18, z: 22.333292}
+  m_LocalPosition: {x: 4.48, y: -0.35, z: 22.333292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1592977180}
@@ -1292,7 +1292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2450370866520404861, guid: a9cae56818ead0840bfe86630d904d24, type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2654234850363326102, guid: a9cae56818ead0840bfe86630d904d24, type: 3}
       propertyPath: m_IsTrigger
@@ -1579,7 +1579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2450370866520404861, guid: a9cae56818ead0840bfe86630d904d24, type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2654234850363326102, guid: a9cae56818ead0840bfe86630d904d24, type: 3}
       propertyPath: m_IsTrigger
@@ -2065,7 +2065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2450370866520404861, guid: a9cae56818ead0840bfe86630d904d24, type: 3}
       propertyPath: m_Layer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2654234850363326102, guid: a9cae56818ead0840bfe86630d904d24, type: 3}
       propertyPath: m_IsTrigger
