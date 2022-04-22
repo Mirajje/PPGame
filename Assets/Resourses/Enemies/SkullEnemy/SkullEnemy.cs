@@ -67,13 +67,11 @@ public class SkullEnemy : MonoBehaviour
         {
             if (m_aiSensor.State() > transform.position.x && inputX == 0)
             {
-                m_animator.SetTrigger("IsAttacking");
                 transform.localScale = new Vector3(-1f, 1f, 1f);
                 attack_Timer = 5f;
                 Attack();
             } else if (inputX == 0)
             {
-                m_animator.SetTrigger("IsAttacking");
                 transform.localScale = new Vector3(1f, 1f, 1f);
                 attack_Timer = 5f;
                 Attack();
@@ -90,6 +88,7 @@ public class SkullEnemy : MonoBehaviour
 
     void Attack()
     {
+        m_animator.SetTrigger("IsAttacking");
         if (transform.localScale.x == 1.0f)
             Instantiate(player_bullet_right, attack_Point.position, Quaternion.identity);
         else

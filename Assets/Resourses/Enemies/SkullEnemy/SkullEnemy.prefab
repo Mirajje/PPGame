@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 6620552374690782953}
   - component: {fileID: 160810538622605474}
   - component: {fileID: 6101478693567487866}
+  - component: {fileID: 110087194197143834}
   m_Layer: 6
   m_Name: SkullEnemy
   m_TagString: Enemy
@@ -243,6 +244,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &110087194197143834
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414243804430418518}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 324966a8d3e67014db3b53de6afaccac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7299758069824395231
 GameObject:
   m_ObjectHideFlags: 0
