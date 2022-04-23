@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - HitBox
   - Bullet
+  - SuicideBox
+  - Ground
   layers:
   - Default
   - TransparentFX

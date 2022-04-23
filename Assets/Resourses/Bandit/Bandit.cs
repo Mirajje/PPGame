@@ -28,9 +28,9 @@ public class Bandit : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.name == "Tile" && !m_grounded)
+        if (col.gameObject.tag == "Ground" && !m_grounded)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - 10f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
         }
     }
 
@@ -130,7 +130,7 @@ public class Bandit : MonoBehaviour {
     {
         if (m_isDead)
             return;
-        if (other.gameObject.tag == "HitBox" || other.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "SuicideBox" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "HitBox")
         {
             m_health -= 1;
             float green = 0f;
@@ -139,7 +139,7 @@ public class Bandit : MonoBehaviour {
 
             m_cube.GetComponent<SpriteRenderer>().color = new Color((m_health == 2 || m_health == 1) ? 1.0f : 0f, (m_health == 2 ? 1.0f : 0f), 0f);
 
-            if (other.gameObject.tag == "HitBox")
+            if (other.gameObject.tag == "SuicideBox")
                 Destroy(other.transform.parent.gameObject);
             else
                 Destroy(other.gameObject);

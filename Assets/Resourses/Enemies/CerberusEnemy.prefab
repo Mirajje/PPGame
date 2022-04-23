@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7792167538204145231}
   m_Layer: 8
   m_Name: HitBox
-  m_TagString: HitBox
+  m_TagString: SuicideBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
