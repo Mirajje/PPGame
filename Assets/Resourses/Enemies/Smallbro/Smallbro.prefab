@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2343719140312623033}
   - component: {fileID: 7792167538204145231}
+  - component: {fileID: 4347133783600149666}
   m_Layer: 8
   m_Name: HitBox
   m_TagString: SuicideBox
@@ -57,6 +58,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.05, y: 2.05}
   m_EdgeRadius: 0
+--- !u!114 &4347133783600149666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167854678420581510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f253891aa9b42d44a89e7c8953f7a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackDamage: 1
 --- !u!1 &3924960872282043553
 GameObject:
   m_ObjectHideFlags: 0

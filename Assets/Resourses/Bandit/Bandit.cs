@@ -1,23 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bandit : MonoBehaviour {
+public class Bandit : MonoBehaviour
+{
 
-    [SerializeField] float      m_speed = 4.0f;
-    [SerializeField] float      m_jumpForce = 7.5f;
+    [SerializeField] float m_speed = 4.0f;
+    [SerializeField] float m_jumpForce = 7.5f;
 
-    private GameObject          m_cube;
-    private int                 m_health;
-    private Animator            m_animator;
-    private Rigidbody2D         m_body2d;
-    private Sensor_Bandit       m_groundSensor;
-    private AttackBox_Bandit    m_attackBox;
-    private bool                m_grounded = false;
-    private bool                m_combatIdle = false;
-    private bool                m_isDead = false;
+    private GameObject m_cube;
+    public int m_health;
+    private Animator m_animator;
+    private Rigidbody2D m_body2d;
+    private Sensor_Bandit m_groundSensor;
+    private AttackBox_Bandit m_attackBox;
+    private bool m_grounded = false;
+    private bool m_combatIdle = false;
+    private bool m_isDead = false;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         m_health = 3;
         m_cube = GameObject.Find("HealthCube_Bandit");
         m_attackBox = transform.Find("AttackBox").GetComponent<AttackBox_Bandit>();
@@ -35,8 +37,10 @@ public class Bandit : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () 
+    void Update()
     {
+        m_cube.GetComponent<SpriteRenderer>().color = new Color((m_health == 2 || m_health == 1) ? 1.0f : 0f, (m_health == 3 || m_health == 2 ? 1.0f : 0f), 0f);
+
         if (m_isDead)
             return;
 
@@ -52,7 +56,8 @@ public class Bandit : MonoBehaviour {
             transform.position = new Vector3(0.0f, 1.0f, 0.0f);
 
         //Check if character just started falling
-        if(m_grounded && !m_groundSensor.State()) {
+        if (m_grounded && !m_groundSensor.State())
+        {
             m_grounded = false;
             m_animator.SetBool("Grounded", false);
         }
@@ -75,21 +80,22 @@ public class Bandit : MonoBehaviour {
 
         // -- Handle Animations --
         //Death
-        if (Input.GetKeyDown("e")) {
-            if(!m_isDead)
+        if (Input.GetKeyDown("e"))
+        {
+            if (!m_isDead)
                 m_animator.SetTrigger("Death");
             else
                 m_animator.SetTrigger("Recover");
 
             m_isDead = !m_isDead;
         }
-            
+
         //Hurt
         else if (Input.GetKeyDown("q"))
             m_animator.SetTrigger("Hurt");
 
         //Attack
-        if(Input.GetMouseButtonDown(0) && m_attackBox.timer() == 0f) 
+        if (Input.GetMouseButtonDown(0) && m_attackBox.timer() == 0f)
         {
             m_animator.SetTrigger("Attack");
             m_attackBox.changeState(true);
@@ -105,7 +111,8 @@ public class Bandit : MonoBehaviour {
             m_combatIdle = !m_combatIdle;
 
         //Jump
-        else if (Input.GetKeyDown("space") && m_grounded && m_attackBox.timer() < 1.1f) {
+        else if (Input.GetKeyDown("space") && m_grounded && m_attackBox.timer() < 1.1f)
+        {
             m_animator.SetTrigger("Jump");
             m_grounded = false;
             m_animator.SetBool("Grounded", m_grounded);
@@ -124,6 +131,8 @@ public class Bandit : MonoBehaviour {
         //Idle
         else
             m_animator.SetInteger("AnimState", 0);
+
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -132,19 +141,14 @@ public class Bandit : MonoBehaviour {
             return;
         if (other.gameObject.tag == "SuicideBox" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "HitBox")
         {
-            m_health -= 1;
-            float green = 0f;
-            if (m_health == 2)
-                green = 1f;
-
-            m_cube.GetComponent<SpriteRenderer>().color = new Color((m_health == 2 || m_health == 1) ? 1.0f : 0f, (m_health == 2 ? 1.0f : 0f), 0f);
+            m_health -= other.gameObject.GetComponent<DamageScript>().AttackDamage;
 
             if (other.gameObject.tag == "SuicideBox")
                 Destroy(other.transform.parent.gameObject);
             else
                 Destroy(other.gameObject);
         }
-            
+
 
         if (m_health <= 0)
         {
@@ -152,5 +156,4 @@ public class Bandit : MonoBehaviour {
             m_isDead = true;
         }
     }
-
 }
