@@ -23,7 +23,7 @@ public class BulletScriptRight : MonoBehaviour
         Move();
 
         //Check if bullet flew off the map
-        if (Math.Abs(transform.position.x) > 30f)
+        if (Math.Abs(transform.position.x) > 500f)
             Destroy(gameObject);
     }
 

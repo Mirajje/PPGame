@@ -13,14 +13,16 @@ public class Bandit : MonoBehaviour
     private Rigidbody2D m_body2d;
     private Sensor_Bandit m_groundSensor;
     private AttackBox_Bandit m_attackBox;
-    private bool m_grounded = false;
+    public bool m_grounded = false;
     private bool m_combatIdle = false;
     private bool m_isDead = false;
+    private float last_coor = -1f;
+    private int dmg = 0;
 
     // Use this for initialization
     void Start()
     {
-        m_health = 3;
+        m_health = 1;
         m_cube = GameObject.Find("HealthCube_Bandit");
         m_attackBox = transform.Find("AttackBox").GetComponent<AttackBox_Bandit>();
         m_animator = GetComponent<Animator>();
@@ -40,6 +42,7 @@ public class Bandit : MonoBehaviour
     void Update()
     {
         m_cube.GetComponent<SpriteRenderer>().color = new Color((m_health == 2 || m_health == 1) ? 1.0f : 0f, (m_health == 3 || m_health == 2 ? 1.0f : 0f), 0f);
+       
 
         if (m_isDead)
             return;
@@ -47,6 +50,24 @@ public class Bandit : MonoBehaviour
         //Check if character just landed on the ground
         if (!m_grounded && m_groundSensor.State())
         {
+            if (last_coor == -1)
+                last_coor = transform.position.y;
+            else
+                dmg = (int)((last_coor - transform.position.y) / 5);
+
+            if (dmg > 0)
+            {
+                m_health -= dmg;
+                dmg = 0;
+                m_animator.SetTrigger("Hurt");
+            }
+            if (m_health <= 0)
+            {
+                m_animator.SetTrigger("Death");
+                m_isDead = true;
+            }
+
+            last_coor = transform.position.y;
             m_grounded = true;
             m_animator.SetBool("Grounded", m_grounded);
         }
@@ -77,22 +98,6 @@ public class Bandit : MonoBehaviour
 
         //Set AirSpeed in animator
         m_animator.SetFloat("AirSpeed", m_body2d.velocity.y);
-
-        // -- Handle Animations --
-        //Death
-        if (Input.GetKeyDown("e"))
-        {
-            if (!m_isDead)
-                m_animator.SetTrigger("Death");
-            else
-                m_animator.SetTrigger("Recover");
-
-            m_isDead = !m_isDead;
-        }
-
-        //Hurt
-        else if (Input.GetKeyDown("q"))
-            m_animator.SetTrigger("Hurt");
 
         //Attack
         if (Input.GetMouseButtonDown(0) && m_attackBox.timer() == 0f)
@@ -139,9 +144,11 @@ public class Bandit : MonoBehaviour
     {
         if (m_isDead)
             return;
+
         if (other.gameObject.tag == "SuicideBox" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "HitBox")
         {
             m_health -= other.gameObject.GetComponent<DamageScript>().AttackDamage;
+            m_animator.SetTrigger("Hurt");
 
             if (other.gameObject.tag == "SuicideBox")
                 Destroy(other.transform.parent.gameObject);

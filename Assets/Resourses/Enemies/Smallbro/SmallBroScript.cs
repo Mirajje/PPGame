@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 
@@ -39,6 +40,8 @@ public class SmallBroScript : MonoBehaviour
 
         // -- Handle input and movement --
         float inputX = m_aiSensor.State();
+        if (Math.Abs(inputX - transform.position.x) < 0.05f)
+            inputX = 0;
         if (inputX != 0)
             if (inputX > transform.position.x)
                 inputX = 1.0f;

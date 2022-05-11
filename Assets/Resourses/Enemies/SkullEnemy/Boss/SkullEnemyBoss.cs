@@ -1,0 +1,105 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+
+
+public class SkullEnemyBoss : MonoBehaviour
+{
+    [SerializeField] float m_speed = 1.0f;
+    [SerializeField] float m_jumpForce = 7.5f;
+
+    [SerializeField] private GameObject player_bullet_right;
+    [SerializeField] private GameObject player_bullet_left;
+    [SerializeField] private Transform attack_Point;
+    [SerializeField] private GameObject SkullEnemyBossOriginal;
+
+    public float attack_Timer = 0f;
+    private Rigidbody2D m_body2d;
+    private Animator m_animator;
+    private AI_sensor_boss m_aiSensor;
+    private Sensor_Cube m_groundSensor;
+    private bool m_grounded = false;
+
+    
+
+    // Use this for initialization
+    void Start()
+    {
+        m_animator = GetComponent<Animator>();
+        m_aiSensor = transform.Find("AISensor").GetComponent<AI_sensor_boss>();
+        m_body2d = GetComponent<Rigidbody2D>();
+        m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Cube>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Check if character just landed on the ground
+        if (!m_grounded && m_groundSensor.State())
+            m_grounded = true;
+
+        //Check if character fell off the map
+        if (transform.position.y < -6.0f)
+            transform.position = new Vector3(0.0f, 1.0f, 0.0f);
+
+        //Check if character just started falling
+        if (m_grounded && !m_groundSensor.State())
+            m_grounded = false;
+
+        // -- Handle input and movement --
+
+        float inputX = m_aiSensor.State();
+        if (inputX != 0)
+            if (inputX > transform.position.x && inputX - transform.position.x < 2.5f)
+                inputX = -1.0f;
+            else if (inputX < transform.position.x && transform.position.x - inputX < 2.5f)
+                inputX = 1.0f;
+            else
+                inputX = 0f;
+
+
+        // Swap direction of sprite depending on walk direction
+        if (inputX > 0)
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+        else if (inputX < 0)
+            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+
+        // attack
+        if (attack_Timer <= 0 && m_aiSensor.State() != 0f)
+        {
+            if (m_aiSensor.State() > transform.position.x && inputX == 0)
+            {
+                transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+                attack_Timer = 5f;
+                Attack();
+            }
+            else if (inputX == 0)
+            {
+                transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                attack_Timer = 5f;
+                Attack();
+            }
+        }
+
+        // Move
+        if (!(attack_Timer > 4.0f))
+            m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
+
+        if (attack_Timer > 0)
+            attack_Timer -= Time.deltaTime;
+    }
+
+    void Attack()
+    {
+        m_animator.SetTrigger("IsAttacking");
+        if (transform.localScale.x > 0)
+            Instantiate(player_bullet_right, attack_Point.position, Quaternion.identity);
+        else
+            Instantiate(player_bullet_left, attack_Point.position, Quaternion.identity);
+        GameObject new_boss = Instantiate(SkullEnemyBossOriginal, new Vector3(transform.position.x - Math.Sign(transform.localScale.x) * 10f, transform.position.y, transform.position.z), Quaternion.identity);
+        new_boss.transform.localScale = new Vector3(new_boss.transform.localScale.x * (-1), new_boss.transform.localScale.y, new_boss.transform.localScale.z);
+
+    }
+}
