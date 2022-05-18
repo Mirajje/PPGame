@@ -14,6 +14,8 @@ public class SmallBroScript : MonoBehaviour
     private AI_sensor m_aiSensor;
     private Sensor_Cube m_groundSensor;
     private bool m_grounded = false;
+    private float dir = 0f;
+    private float timer = 0f;
 
     // Use this for initialization
     void Start()
@@ -48,6 +50,31 @@ public class SmallBroScript : MonoBehaviour
             else if (inputX < transform.position.x)
                 inputX = -1.0f;
 
+        if (m_aiSensor.State() == 0)
+            if (timer > 0f)
+            {
+                m_body2d.velocity = new Vector2(dir * m_speed / 2, m_body2d.velocity.y);
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                dir = UnityEngine.Random.Range(-1.0f, 1.0f);
+
+                if (dir > 0)
+                    dir = 1.0f;
+                else if (dir < 0)
+                    dir = -1.0f;
+                else
+                    dir = 0;
+
+                if (dir > 0)
+                    transform.localScale = new Vector3(3f, 3f, 3f);
+                else if (dir < 0)
+                    transform.localScale = new Vector3(-3.0f, 3.0f, 3.0f);
+
+                timer = 2f;
+            }
+
         // Swap direction of sprite depending on walk direction
         if (inputX > 0)
             transform.localScale = new Vector3(3f, 3f, 1f);
@@ -55,6 +82,7 @@ public class SmallBroScript : MonoBehaviour
             transform.localScale = new Vector3(-3.0f, 3.0f, 1.0f);
 
         // Move
-        m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
+        if (m_aiSensor.State() != 0)
+            m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
     }
 }

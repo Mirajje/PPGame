@@ -72,13 +72,13 @@ public class SkullEnemyBoss : MonoBehaviour
             if (m_aiSensor.State() > transform.position.x && inputX == 0)
             {
                 transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
-                attack_Timer = 5f;
+                attack_Timer = 4f;
                 Attack();
             }
             else if (inputX == 0)
             {
                 transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-                attack_Timer = 5f;
+                attack_Timer = 4f;
                 Attack();
             }
         }

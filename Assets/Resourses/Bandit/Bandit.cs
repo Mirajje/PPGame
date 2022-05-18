@@ -18,11 +18,12 @@ public class Bandit : MonoBehaviour
     private bool m_isDead = false;
     private float last_coor = -1f;
     private int dmg = 0;
+    public int coinAmount = 1;
 
     // Use this for initialization
     void Start()
     {
-        m_health = 1;
+        m_health = 3;
         m_cube = GameObject.Find("HealthCube_Bandit");
         m_attackBox = transform.Find("AttackBox").GetComponent<AttackBox_Bandit>();
         m_animator = GetComponent<Animator>();
@@ -42,7 +43,7 @@ public class Bandit : MonoBehaviour
     void Update()
     {
         m_cube.GetComponent<SpriteRenderer>().color = new Color((m_health == 2 || m_health == 1) ? 1.0f : 0f, (m_health == 3 || m_health == 2 ? 1.0f : 0f), 0f);
-       
+
 
         if (m_isDead)
             return;

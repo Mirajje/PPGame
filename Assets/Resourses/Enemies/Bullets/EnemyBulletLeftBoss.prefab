@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3058918574435173215, guid: daf09608350d6e24a8c3e9612728c60c, type: 3}
+      propertyPath: AttackDamage
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4211727101292855163, guid: daf09608350d6e24a8c3e9612728c60c, type: 3}
       propertyPath: m_Name
-      value: EnemyBulletRight 1
+      value: EnemyBulletLeftBoss
       objectReference: {fileID: 0}
     - target: {fileID: 6055604445777633871, guid: daf09608350d6e24a8c3e9612728c60c, type: 3}
       propertyPath: m_RootOrder

@@ -51,7 +51,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 4
-  m_jumpForce: 7.5
+  m_jumpForce: 8
+  m_health: 0
+  m_grounded: 0
+  coinAmount: 1
 --- !u!95 &95346456782871180
 Animator:
   serializedVersion: 3

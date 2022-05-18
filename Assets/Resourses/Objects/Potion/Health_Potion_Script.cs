@@ -14,6 +14,7 @@ public class Health_Potion_Script : MonoBehaviour
             {
                 other.gameObject.GetComponent<Bandit>().m_health = other.gameObject.GetComponent<Bandit>().m_health + 1;
                 Destroy(transform.parent.gameObject);
+                Destroy(gameObject);
             }
         }
     }
@@ -26,6 +27,7 @@ public class Health_Potion_Script : MonoBehaviour
             {
                 other.gameObject.GetComponent<Bandit> ().m_health += 1;
                 Destroy(transform.parent.gameObject);
+                Destroy(gameObject);
             }
         }
     }

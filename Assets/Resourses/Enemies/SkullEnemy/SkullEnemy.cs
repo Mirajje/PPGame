@@ -9,9 +9,9 @@ public class SkullEnemy : MonoBehaviour
     [SerializeField] float m_speed = 4.0f;
     [SerializeField] float m_jumpForce = 7.5f;
 
-    [SerializeField]  private GameObject player_bullet_right;
+    [SerializeField] private GameObject player_bullet_right;
     [SerializeField] private GameObject player_bullet_left;
-    [SerializeField]   private Transform attack_Point;
+    [SerializeField] private Transform attack_Point;
 
     public float attack_Timer = 0f;
     private Rigidbody2D m_body2d;
@@ -19,6 +19,8 @@ public class SkullEnemy : MonoBehaviour
     private AI_sensor m_aiSensor;
     private Sensor_Cube m_groundSensor;
     private bool m_grounded = false;
+    private float timer = 0f;
+    private float dir = 0;
 
     // Use this for initialization
     void Start()
@@ -32,6 +34,7 @@ public class SkullEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Check if character just landed on the ground
         if (!m_grounded && m_groundSensor.State())
             m_grounded = true;
@@ -54,7 +57,33 @@ public class SkullEnemy : MonoBehaviour
                 inputX = 1.0f;
             else
                 inputX = 0f;
-            
+
+        if (m_aiSensor.State() == 0)
+            if (timer > 0f)
+            {
+                if (!(attack_Timer > 4.0f))
+                    m_body2d.velocity = new Vector2(dir * m_speed / 2, m_body2d.velocity.y);
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                dir = Random.Range(-1.0f, 1.0f);
+
+                if (dir > 0)
+                    dir = 1.0f;
+                else if (dir < 0)
+                    dir = -1.0f;
+                else
+                    dir = 0;
+
+                if (dir > 0)
+                    transform.localScale = new Vector3(-1f, 1f, 1f);
+                else if (dir < 0)
+                    transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+                timer = 2f;
+            }
+
 
         // Swap direction of sprite depending on walk direction
         if (inputX > 0)
@@ -70,7 +99,8 @@ public class SkullEnemy : MonoBehaviour
                 transform.localScale = new Vector3(-1f, 1f, 1f);
                 attack_Timer = 5f;
                 Attack();
-            } else if (inputX == 0)
+            }
+            else if (inputX == 0)
             {
                 transform.localScale = new Vector3(1f, 1f, 1f);
                 attack_Timer = 5f;
@@ -79,7 +109,7 @@ public class SkullEnemy : MonoBehaviour
         }
 
         // Move
-        if (!(attack_Timer > 4.0f))
+        if (!(attack_Timer > 4.0f) && m_aiSensor.State() != 0f)
             m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
 
         if (attack_Timer > 0)
