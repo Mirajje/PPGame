@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 1698533841846622003}
   - component: {fileID: 8647277649668009682}
   m_Layer: 5
-  m_Name: Coin
+  m_Name: aboba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
